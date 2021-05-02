@@ -1,3 +1,5 @@
+soundOn = false;
+
 // theme
 var font = "24px franklin gothic";
 var bounce = new Audio('bounce.mp3');
