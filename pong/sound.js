@@ -1,4 +1,4 @@
-var speaker2 = document.getElementById("speakerImage")
+var speaker2 = document.getElementById("speakerImage");
 
 speaker2.addEventListener("click", function(speaker) {
     if (soundOn) {

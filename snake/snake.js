@@ -6,11 +6,13 @@ var appleColor = "red";
 var bgndColor = "black";
 var eat = new Audio('eat.mp3');
 var crash = new Audio('crash.mp3');
+var font = "24px franklin gothic";
+var textColor = "white";
 
 // game factors
 var initLength = 3;
-var fps = 15;
-var gameMode = "wrap";
+var fps = 13;
+gameMode = "wrap";
 
 const canvas = document.getElementById("snake");
 const context = canvas.getContext("2d");
@@ -20,34 +22,46 @@ function drawRect(x, y, width, height, color) {
     context.fillRect(x, y, width, height);
 }
 
+function drawText(text, x, y, color) {
+    context.fillStyle = color;
+    context.font = font;
+    context.fillText(text, x, y);
+}
+
 function playCrash() {
     if (soundOn) {
         crash.play();
     }
 }
 
-var squareSize = 20;
-var tiles = 20;
+var score = 0;
+var endGame = false;
 
-var player_x = 4;
+var squareSize = 20;
+var xTiles = 30;
+var yTiles = 20;
+
+var player_x = 8;
 var player_y = 10;
 var vx = 0;
 var vy = 0;
 var length = initLength;
 var trail = [];
 
-var apple_x = 15;
+var apple_x = 20;
 var apple_y = 10;
 
 function reset() {
-    player_x = 4;
+    score = 0;
+
+    player_x = 8;
     player_y = 10;
     vx = 0;
     vy = 0;
     length = initLength;
     trail = [];
 
-    apple_x = 15;
+    apple_x = 20;
     apple_y = 10;
 }
 
@@ -90,35 +104,31 @@ function update() {
     if (gameMode == "wrap") {
         // wrap the snake around the board
         if (player_x < 0) {
-            player_x = tiles - 1;
+            player_x = xTiles - 1;
         }
-        else if (player_x > tiles - 1) {
+        else if (player_x > xTiles - 1) {
             player_x = 0;
         }
         else if (player_y < 0) {
-            player_y = tiles - 1;
+            player_y = yTiles - 1;
         }
-        else if (player_y > tiles - 1) {
+        else if (player_y > yTiles - 1) {
             player_y = 0;
         }
     }
     else {
         // reset the game when the snake leaves the board
         if (player_x < 0) {
-            playCrash();
-            reset();
+            endGame = true;
         }
-        else if (player_x > tiles - 1) {
-            playCrash();
-            reset();
+        else if (player_x > xTiles - 1) {
+            endGame = true;
         }
         else if (player_y < 0) {
-            playCrash();
-            reset();
+            endGame = true;
         }
-        else if (player_y > tiles - 1) {
-            playCrash();
-            reset();
+        else if (player_y > yTiles - 1) {
+            endGame = true;
         }
     }
 
@@ -130,20 +140,17 @@ function update() {
         drawRect(trail[i].x*squareSize, trail[i].y*squareSize, squareSize, squareSize, snakeColor)
         
         if (trail[i].x == player_x && trail[i].y == player_y) {
-            if (vx != 0 || vy != 0) {
-                playCrash();
-            }
-
-            reset();
+            endGame = true;
         }
     }
 
+    // add a new square to the snake at the head
     trail.push({
         x : player_x,
         y : player_y    
     });
 
-    // ensure that the snake is the correct length
+    // reduce the snake's length
     while (trail.length > length) {
         trail.shift();
     }
@@ -154,13 +161,24 @@ function update() {
             eat.play();
         }
 
+        score++;
         length++;
-        apple_x = Math.floor(Math.random() * tiles);
-        apple_y = Math.floor(Math.random() * tiles);
+        apple_x = Math.floor(Math.random() * xTiles);
+        apple_y = Math.floor(Math.random() * yTiles);
     }
 
     // show the apple
     drawRect(apple_x*squareSize, apple_y*squareSize, squareSize, squareSize, appleColor);
+
+    // show the score
+    drawText(score, 60, 60, textColor)
+
+    if (endGame && (vx != 0 || vy != 0)) {
+        playCrash();
+        reset();
+    }
+
+    endGame = false;
 }
 
 setInterval(update, 1000/fps)

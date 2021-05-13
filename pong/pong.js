@@ -15,7 +15,7 @@ var netColor = "#ffffff";
 // game factors
 var initBallSpeedX = 3.5;
 var initBallSpeedY = 3.5;
-var ballAccelleration = 0.25;
+var ballAccelleration = 0.5;
 var playerSpeed = 0.01;
 var botSpeed = 3.25;
 
