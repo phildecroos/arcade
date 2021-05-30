@@ -143,7 +143,7 @@ function update() {
             else if (board[x][y][0] == 1) {
                 drawRect(x*tlHgt + 2, y*tlHgt + 2, sqHgt, sqHgt, playedColor);
                 if (board[x][y][1] < 10) {
-                    drawText(board[x][y][1], x*tlHgt + 14, y*tlHgt + 28, textColor);
+                    drawText(board[x][y][1], x*tlHgt + 13, y*tlHgt + 28, textColor);
                 }
                 else {
                     drawText(board[x][y][1], x*tlHgt + 6, y*tlHgt + 28, textColor);
@@ -152,7 +152,7 @@ function update() {
             else if (board[x][y][0] == 2) {
                 drawRect(x*tlHgt + 2, y*tlHgt + 2, sqHgt, sqHgt, currentColor);
                 if (board[x][y][1] < 10) {
-                    drawText(board[x][y][1], x*tlHgt + 14, y*tlHgt + 28, textColor);
+                    drawText(board[x][y][1], x*tlHgt + 13, y*tlHgt + 28, textColor);
                 }
                 else if (board[x][y][1] == 100) {
                     drawText(board[x][y][1], x*tlHgt - 1, y*tlHgt + 28, textColor);
