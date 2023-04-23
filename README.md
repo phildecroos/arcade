@@ -1,3 +1,3 @@
 # Online Arcade
 
-An arcade website <a href="https://phildecroos.com/arcade/">phildecroos.com/arcade</a>
+An arcade website showcasing all the games I have made: <a href="https://phildecroos.com/arcade/">phildecroos.com/arcade</a>
