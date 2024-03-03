@@ -1,6 +1,6 @@
 var setting = document.getElementById("snakeSetting");
 
-setting.addEventListener("click", function(speaker) {
+setting.addEventListener("click", function (speaker) {
     if (gameMode == "wrap") {
         gameMode = "wall";
         setting.src = '../icons/box.png';

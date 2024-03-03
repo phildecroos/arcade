@@ -1,6 +1,6 @@
 var setting = document.getElementById("reset");
 
-setting.addEventListener("click", function(reset) {
+setting.addEventListener("click", function (reset) {
     score = 0;
     firstMove = true;
     board = [];
@@ -9,7 +9,3 @@ setting.addEventListener("click", function(reset) {
         board.push([[3, 0], [3, 0], [3, 0], [3, 0], [3, 0], [3, 0], [3, 0], [3, 0], [3, 0], [3, 0]])
     }
 })
-
-
-
-

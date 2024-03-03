@@ -32,7 +32,7 @@ function drawRect(x, y, width, height, color) {
 function drawCircle(x, y, radius, color) {
     context.fillStyle = color;
     context.beginPath();
-    context.arc(x, y, radius, 0, Math.PI*2, false);
+    context.arc(x, y, radius, 0, Math.PI * 2, false);
     context.closePath();
     context.fill();
 }
@@ -59,45 +59,45 @@ function drawTri(x1, y1, x2, y2, x3, y3, color) {
 }
 
 const player = {
-    x : 0,
-    y : canvas.height/2 - 100/2,
-    width : 20,
-    height : 100,
-    color : paddleColor,
-    score : 0,
-    health : 3
+    x: 0,
+    y: canvas.height / 2 - 100 / 2,
+    width: 20,
+    height: 100,
+    color: paddleColor,
+    score: 0,
+    health: 3
 }
 
 const bot = {
-    x : canvas.width - 20,
-    y : canvas.height/2 - 100/2,
-    width : 20,
-    height : 100,
-    color : paddleColor,
+    x: canvas.width - 20,
+    y: canvas.height / 2 - 100 / 2,
+    width: 20,
+    height: 100,
+    color: paddleColor,
 }
 
 const ball = {
-    x : canvas.width/2,
-    y : canvas.height/2,
-    radius : 10,
-    color : ballColor,
-    speedX : Math.sign((Math.random() * (1 - (-1) + 1) + (-1))) * initBallSpeedX,
-    speedY : Math.sign((Math.random() * (1 - (-1) + 1) + (-1))) * initBallSpeedY
+    x: canvas.width / 2,
+    y: canvas.height / 2,
+    radius: 10,
+    color: ballColor,
+    speedX: Math.sign((Math.random() * (1 - (-1) + 1) + (-1))) * initBallSpeedX,
+    speedY: Math.sign((Math.random() * (1 - (-1) + 1) + (-1))) * initBallSpeedY
 }
 
 const net = {
-    x : canvas.width/2 - 4/2,
-    y : 0,
-    width : 4,
-    height : 15,
-    color : netColor
+    x: canvas.width / 2 - 4 / 2,
+    y: 0,
+    width: 4,
+    height: 15,
+    color: netColor
 }
 
 function resetBall() {
-    player.y = canvas.height/2 - 100/2;
-    bot.y = canvas.height/2 - 100/2;
-    ball.x = canvas.width/2;
-    ball.y = canvas.height/2;
+    player.y = canvas.height / 2 - 100 / 2;
+    bot.y = canvas.height / 2 - 100 / 2;
+    ball.x = canvas.width / 2;
+    ball.y = canvas.height / 2;
     ball.speedX = Math.sign((Math.random() * (1 - (-1) + 1) + (-1))) * initBallSpeedX;
     ball.speedY = Math.sign((Math.random() * (1 - (-1) + 1) + (-1))) * initBallSpeedY;
 }
@@ -128,10 +128,10 @@ window.addEventListener("mousemove", (event) => {
 });
 
 function moveBot() {
-    if (ball.y < bot.y + bot.height/2) {
+    if (ball.y < bot.y + bot.height / 2) {
         bot.y -= botSpeed;
     }
-    else if (ball.y > bot.y + bot.height/2) {
+    else if (ball.y > bot.y + bot.height / 2) {
         bot.y += botSpeed;
     }
 
@@ -151,18 +151,18 @@ function updateData() {
         ball.speedY = -ball.speedY;
     }
 
-    let paddle = (ball.x < canvas.width/2) ? player : bot;
+    let paddle = (ball.x < canvas.width / 2) ? player : bot;
 
     if (collision(ball, paddle)) {
         ball.speedX = -ball.speedX;
-        
+
         if (ball.speedX > 0) {
             ball.speedX += ballAccelleration;
         }
         else {
             ball.speedX -= ballAccelleration;
         }
-        
+
         if (ball.y >= paddle.y && ball.y <= paddle.y + 15) {
             if (ball.speedY > 0) {
                 ball.speedY += ballAccelleration;
@@ -181,7 +181,7 @@ function updateData() {
                 ball.speedY *= -1;
             }
         }
-        
+
         player.score++;
 
         if (soundOn) {
@@ -189,7 +189,7 @@ function updateData() {
         }
     }
 
-    if ((ball.y  <= 0) || (ball.y + ball.radius >= canvas.height)) {
+    if ((ball.y <= 0) || (ball.y + ball.radius >= canvas.height)) {
         ball.speedY = -ball.speedY;
     }
 
@@ -203,7 +203,7 @@ function updateData() {
         playing = false;
 
         function reset() {
-            setTimeout(function(){ resetBall(); playing = true; }, 500);
+            setTimeout(function () { resetBall(); playing = true; }, 500);
         }
 
         reset();
@@ -213,7 +213,7 @@ function updateData() {
             player.score = 0;
         }
     }
-    
+
     else if (ball.x + ball.radius > canvas.width && playing) {
         player.score += 5;
 
@@ -224,7 +224,7 @@ function updateData() {
         playing = false;
 
         function reset() {
-            setTimeout(function(){ resetBall(); playing = true; }, 500);
+            setTimeout(function () { resetBall(); playing = true; }, 500);
         }
 
         reset();
@@ -238,7 +238,7 @@ function updateData() {
 function updateScreen() {
     // reset screen
     drawRect(0, 0, canvas.width, canvas.height, backgroundColor);
-    
+
     // draw the net
     for (let i = 2.5; i < canvas.height; i += 20) {
         drawRect(net.x, net.y + i, net.width, net.height, net.color);
@@ -252,8 +252,7 @@ function updateScreen() {
     drawCircle(ball.x, ball.y, ball.radius, ball.color);
 
     // draw the health
-    for (i = 0; i < player.health; i++)
-    {
+    for (i = 0; i < player.health; i++) {
         var x = i * 35 + 60;
         drawCircle(x, 40, 8, heartColor);
         drawCircle(x + 11, 40, 8, heartColor);
@@ -271,4 +270,4 @@ function game() {
 
 var fps = 60;
 
-setInterval(game, 1000/fps)
+setInterval(game, 1000 / fps)

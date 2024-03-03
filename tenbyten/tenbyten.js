@@ -53,7 +53,7 @@ function reset() {
 reset();
 
 function onBoard(x, y) {
-    return (x >= 0 && x <=9) && (y >= 0 && y <=9);
+    return (x >= 0 && x <= 9) && (y >= 0 && y <= 9);
 }
 
 function findPlayable() {
@@ -65,12 +65,12 @@ function findPlayable() {
             }
         }
     }
-    
+
     // check board for possible moves
     if (onBoard(currentX, currentY - 3) && board[currentX][currentY - 3][0] != 1) {
         board[currentX][currentY - 3][0] = 3;
     }
-    if (onBoard(currentX + 2, currentY - 2)&& board[currentX + 2][currentY - 2][0] != 1) {
+    if (onBoard(currentX + 2, currentY - 2) && board[currentX + 2][currentY - 2][0] != 1) {
         board[currentX + 2][currentY - 2][0] = 3;
     }
     if (onBoard(currentX + 3, currentY) && board[currentX + 3][currentY][0] != 1) {
@@ -105,7 +105,7 @@ function select(event) {
 
     x = event.clientX - rect.left;
     y = event.clientY - rect.top;
-    
+
     while (x >= tlHgt) {
         selectionX++;
         x -= tlHgt;
@@ -134,39 +134,39 @@ function update() {
     // display the board
     for (var x = 0; x < squares; x++) {
         for (var y = 0; y < squares; y++) {
-            drawRect(x*tlHgt, y*tlHgt, tlHgt, tlHgt, bgndColor);
+            drawRect(x * tlHgt, y * tlHgt, tlHgt, tlHgt, bgndColor);
 
             // 0 = unplayed, 1 = played, 2 = current, 3 = playable
             if (board[x][y][0] == 0) {
-                drawRect(x*tlHgt + 2, y*tlHgt + 2, sqHgt, sqHgt, unplayedColor);
+                drawRect(x * tlHgt + 2, y * tlHgt + 2, sqHgt, sqHgt, unplayedColor);
             }
             else if (board[x][y][0] == 1) {
-                drawRect(x*tlHgt + 2, y*tlHgt + 2, sqHgt, sqHgt, playedColor);
+                drawRect(x * tlHgt + 2, y * tlHgt + 2, sqHgt, sqHgt, playedColor);
                 if (board[x][y][1] < 10) {
-                    drawText(board[x][y][1], x*tlHgt + 13, y*tlHgt + 28, textColor);
+                    drawText(board[x][y][1], x * tlHgt + 13, y * tlHgt + 28, textColor);
                 }
                 else {
-                    drawText(board[x][y][1], x*tlHgt + 6, y*tlHgt + 28, textColor);
+                    drawText(board[x][y][1], x * tlHgt + 6, y * tlHgt + 28, textColor);
                 }
             }
             else if (board[x][y][0] == 2) {
-                drawRect(x*tlHgt + 2, y*tlHgt + 2, sqHgt, sqHgt, currentColor);
+                drawRect(x * tlHgt + 2, y * tlHgt + 2, sqHgt, sqHgt, currentColor);
                 if (board[x][y][1] < 10) {
-                    drawText(board[x][y][1], x*tlHgt + 13, y*tlHgt + 28, textColor);
+                    drawText(board[x][y][1], x * tlHgt + 13, y * tlHgt + 28, textColor);
                 }
                 else if (board[x][y][1] == 100) {
-                    drawText(board[x][y][1], x*tlHgt - 1, y*tlHgt + 28, textColor);
+                    drawText(board[x][y][1], x * tlHgt - 1, y * tlHgt + 28, textColor);
                 }
                 else {
-                    drawText(board[x][y][1], x*tlHgt + 6, y*tlHgt + 28, textColor);
+                    drawText(board[x][y][1], x * tlHgt + 6, y * tlHgt + 28, textColor);
                 }
-                
+
             }
             else if (board[x][y][0] == 3) {
-                drawRect(x*tlHgt + 2, y*tlHgt + 2, sqHgt, sqHgt, playableColor);
+                drawRect(x * tlHgt + 2, y * tlHgt + 2, sqHgt, sqHgt, playableColor);
             }
         }
     }
 }
 
-setInterval(update, 1000/fps)
+setInterval(update, 1000 / fps)

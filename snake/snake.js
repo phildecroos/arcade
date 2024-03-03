@@ -66,7 +66,7 @@ function reset() {
 }
 
 function keyPush(event) {
-    switch(event.keyCode) {
+    switch (event.keyCode) {
         case 37:
             if (vx != 1) {
                 vx = -1;
@@ -137,8 +137,8 @@ function update() {
 
     // show the snake
     for (var i = 0; i < trail.length; i++) {
-        drawRect(trail[i].x*squareSize, trail[i].y*squareSize, squareSize, squareSize, snakeColor)
-        
+        drawRect(trail[i].x * squareSize, trail[i].y * squareSize, squareSize, squareSize, snakeColor)
+
         if (trail[i].x == player_x && trail[i].y == player_y) {
             endGame = true;
         }
@@ -146,8 +146,8 @@ function update() {
 
     // add a new square to the snake at the head
     trail.push({
-        x : player_x,
-        y : player_y    
+        x: player_x,
+        y: player_y
     });
 
     // reduce the snake's length
@@ -168,7 +168,7 @@ function update() {
     }
 
     // show the apple
-    drawRect(apple_x*squareSize, apple_y*squareSize, squareSize, squareSize, appleColor);
+    drawRect(apple_x * squareSize, apple_y * squareSize, squareSize, squareSize, appleColor);
 
     // show the score
     drawText(score, 60, 60, textColor)
@@ -181,4 +181,4 @@ function update() {
     endGame = false;
 }
 
-setInterval(update, 1000/fps)
+setInterval(update, 1000 / fps)
